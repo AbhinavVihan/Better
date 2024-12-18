@@ -94,17 +94,38 @@ jobs:
         kubectl set image deployment/my-app my-app=${{ secrets.DOCKER_USERNAME }}/my-app:$IMAGE_TAG
 
   # Job to send email notifications
+    # Job to send email notifications
   notify:
     needs: kubernetes-deploy
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install msmtp
+      run: |
+        sudo apt-get update
+        sudo apt-get install msmtp msmtp-mta
+
+    - name: Configure msmtp (for Gmail SMTP example)
+      run: |
+        echo "defaults" > ~/.msmtprc
+        echo "account gmail" >> ~/.msmtprc
+        echo "host smtp.gmail.com" >> ~/.msmtprc
+        echo "port 587" >> ~/.msmtprc
+        echo "auth on" >> ~/.msmtprc
+        echo "user ${{ secrets.GMAIL_USERNAME }}" >> ~/.msmtprc
+        echo "from ${{ secrets.GMAIL_USERNAME }}" >> ~/.msmtprc
+        echo "password ${{ secrets.GMAIL_PASSWORD }}" >> ~/.msmtprc
+        echo "tls on" >> ~/.msmtprc
+        echo "tls_starttls on" >> ~/.msmtprc
+        echo "logfile ~/.msmtp.log" >> ~/.msmtprc
+        chmod 600 ~/.msmtprc
+
     - name: Send success notification
       if: success()
       run: |
-        echo "Deployment Successful!" | mail -s "CI/CD Pipeline Success" abhinavchaudhary348@gmail.com
+        echo "Deployment Successful!" | msmtp -s "CI/CD Pipeline Success" abhinavchaudhary348@gmail.com
 
     - name: Send failure notification
       if: failure()
       run: |
-        echo "Deployment Failed!" | mail -s "CI/CD Pipeline Failure" abhinavchaudhary348@gmail.com
+        echo "Deployment Failed!" | msmtp -s "CI/CD Pipeline Failure" abhinavchaudhary348@gmail.com
