@@ -123,9 +123,9 @@ jobs:
     - name: Send success notification
       if: success()
       run: |
-        echo -e "Subject: CI/CD Pipeline Success\n\nDeployment Successful!" | msmtp ${{ secrets.NOTIFY_EMAIL }}
+        echo -e "Subject: CI/CD Pipeline Success\n\nDeployment Successful!" | msmtp ${{ secrets.GMAIL_USERNAME }}
 
     - name: Send failure notification
       if: failure()
       run: |
-        echo -e "Subject: CI/CD Pipeline Failure\n\nDeployment Failed!" | msmtp ${{ secrets.NOTIFY_EMAIL }}
+        echo -e "Subject: CI/CD Pipeline Failure\n\nDeployment Failed!" | msmtp ${{ secrets.GMAIL_USERNAME }}
