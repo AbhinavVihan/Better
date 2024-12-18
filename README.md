@@ -1,230 +1,84 @@
-<!-- <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="To Do Web App served with Node.js and Express.js" />
+# My Node.js Application
 
-  &#xa0;
+This is a simple Node.js application that demonstrates a basic CI/CD pipeline using GitHub Actions, Docker, and Kubernetes (or Minikube). This project includes automated testing, Docker image building, Docker Hub deployment, and Kubernetes deployment using GitHub Actions.
 
-</div> -->
+## Getting Started
 
-<h1 align="center">To Do Web App served with Node.js and Express.js</h1>
+To get a local copy up and running, follow these simple steps.
 
-<p align="center">
-  <img alt="Badge" src="https://github.com/devenes/node-js-dummy-test/actions/workflows/node.js.yml/badge.svg">
-  <img alt="Badge" src="https://github.com/devenes/node-js-dummy-test/actions/workflows/dockerx.yml/badge.svg">
-  <img alt="Badge" src="https://github.com/devenes/node-js-dummy-test/actions/workflows/node.js.scan.yml/badge.svg">
-  <img alt="Badge" src="https://github.com/npm/cli/actions/workflows/ci.yml/badge.svg">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/devenes/node-js-dummy-test?color=yellow">
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/devenes/node-js-dummy-test?color=red">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/devenes/node-js-dummy-test?color=orange">
-  <img alt="License" src="https://img.shields.io/github/license/devenes/node-js-dummy-test?color=purple">
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/devenes/node-js-dummy-test?color=56BEB8" /> -->
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/devenes/node-js-dummy-test?color=56BEB8" /> -->
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/devenes/node-js-dummy-test?color=56BEB8" /> -->
-</p>
+### Prerequisites
 
-<!-- Status -->
+Make sure you have the following tools installed on your local machine:
 
-<!-- <h4 align="center"> 
-	🚧  Dummy Nodejs Todo 🚀 Under construction...  🚧
-</h4> 
+- [Node.js](https://nodejs.org/en/) (version 16 or later)
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Minikube](https://minikube.sigs.k8s.io/docs/) (for local Kubernetes deployment)
 
-<hr> -->
+### Installation
 
-<p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/devenes" target="_blank">Author</a>
-</p>
+1. **Clone the repository**:
 
-<br>
+   ```bash
+   git clone https://github.com/AbhinavVihan/Better.git
+Navigate to the project directory:
 
-## :dart: About ##
-
-Simple To Do application built with Node.js and Express.js that lets you add tasks on a single page, store new and finished tasks in different arrays. Containerized with Docker and tested with NPM through GitHub Actions pipeline.
-## :sparkles: Features ##
-
-:heavy_check_mark: **Add tasks** \
-:heavy_check_mark: **Store tasks** \
-:heavy_check_mark: **Delete tasks** 
-
-## :rocket: Technologies ##
-
-The following tools were used in this project:
-
-- [Node.js](https://nodejs.org/en/)
-- [Javascript](https://www.javascript.com/)
-- [Express.js](https://expressjs.com/)
-- [Docker](https://www.docker.com/)
-- [NPM](https://www.npmjs.com/)
-- [Body-parser](https://www.npmjs.com/package/body-parser)
-- [EJS](https://www.npmjs.com/package/ejs)
-- [CSS](https://www.w3schools.com/css/default.asp)
-
-## Embedded Javascript
-
-EJS simply stands for Embedded Javascript. It is a simple templating language/engine that lets its user generate HTML with plain javascript. EJS is mostly useful whenever you have to output HTML with a lot of javascript. EJS is a simple templating language that lets you generate HTML markup with plain JavaScript. No religiousness about how to organize things. No reinvention of iteration and control-flow.
-
-## Body-Parser
-
-Body-Parser is the Node. js body parsing middleware. It is responsible for parsing the incoming request bodies in a middleware before you handle it. This extracts the entire body portion of an incoming request stream and exposes it on req.body
-
-## :white_check_mark: Requirements ##
-
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
-
-## Output
-
-![png](./readme/todo.jpg)
+cd your-repository-name
+Install the required dependencies:
 
 
-## :checkered_flag: Starting ##
-
-```bash
-# Clone this project
-git clone https://github.com/devenes/node-js-dummy-test
-
-# Access
-cd node-js-dummy-test
-
-# install all needed dependencies
 npm install
+Running Locally
+To run the application locally in development mode:
 
-# Start the app in the browser
+Start the application with the following command:
+
+
 npm start
+The application will be available at http://localhost:3000.
 
-# The server will initialize in the <http://localhost:3000>
-```
+Running with Docker
+To build the Docker image and run it in a container:
 
-![start](./readme/start.jpg)
-
-
-## Test App
-
-Run <code> npm test </code> to run the tests
-
-![test](./readme/test.jpg)
-
-## Build Docker Image with Dockerfile
-
-Use the following commands in your `Dockerfile` to build a Docker image:
-
-```dockerfile
-FROM node:16-alpine
-WORKDIR /app
-COPY package*.json .
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-```
+Build the Docker image:
 
 
-## Containerization with Docker using GitHub Actions
-
-Create your own GitHub Actions workflow to build your Docker image and push it to DockerHub. Name your workflow file as <code> dockerx.yml </code> and add the following steps:
-
-```yml
-name: Docker Deployment
-
-on:
-  push:
-    branches:
-      - "release"
-
-  pull_request:
-    branches:
-      - "release"
-
-jobs:
-  dockerx:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-nodejs-vx:${{github.run_number}}
-```
-
-## Test Your Code with GitHub Actions
-
-Create your own GitHub Actions workflow to test your code. Name your workflow file as <code> node.js.yml </code> and add the following steps:
-
-```yml
-name: Node.js CI Test
-
-on:
-  push:
-    branches:
-      - "*"
-
-  pull_request:
-    branches:
-      - "*"
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-
-      - run: npm ci
-
-      - run: npm run build --if-present
-
-      - run: npm test
-```
-
-## Resources
-
-- [Using workflow run logs](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/using-workflow-run-logs)
-
-- [Understanding GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
-
-- [Node.js](https://www.yusufsezer.com.tr/node-js-npm/)
-
-- [Todo App with Node.js](https://medium.com/@atingenkay/creating-a-todo-app-with-node-js-express-8fa51f39b16f)
-
-- [npm-run-script](https://docs.npmjs.com/cli/v8/commands/npm-run-script)
-
-- [npm-test](https://docs.npmjs.com/cli/v8/commands/npm-test)
-
-- [npm](https://www.npmjs.com/)
+docker build -t my-app .
+Run the Docker container:
 
 
-## :memo: License ##
+docker run -p 3000:3000 my-app
+The app will be available at http://localhost:3000.
 
-This project is under license from Apache 2.0. For more details, see the [LICENSE](LICENSE) file.
+Running on Kubernetes (Minikube)
+If you're using Minikube to run a local Kubernetes cluster, follow these steps to deploy the app:
+
+Start Minikube:
+
+minikube start
+Deploy to Kubernetes:
 
 
-Made with :heart: by <a href="https://github.com/devenes" target="_blank">devenes</a>
+kubectl apply -f kubernetes/deployment.yaml
+Expose the service and get the URL:
 
-&#xa0;
+minikube service my-app-service
+This will open the application in your default web browser at the Minikube IP address.
 
-<a href="#top">⬆️ Back to top</a>
+CI/CD Pipeline
+This project uses GitHub Actions to automate the following tasks:
+
+Run tests on each push or pull request to the main branch.
+Build the Docker image from the Node.js application and push it to Docker Hub.
+Deploy the Docker image to a Kubernetes cluster (using Minikube in this case).
+Workflow Overview
+Build Job: Installs dependencies, runs tests, and builds the Docker image.
+Deploy Job: Logs in to Docker Hub and pushes the image to the repository.
+Kubernetes Deploy Job: Deploys the image to the Kubernetes cluster using kubectl.
+Notifications: Sends email notifications based on the deployment success or failure.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Troubleshooting
+Docker Image Build Issues: If you encounter any issues building the Docker image, make sure your Dockerfile is properly configured.
+Kubernetes Deployment: Ensure that your Kubernetes setup (Minikube or other) is correctly configured, and kubectl is able to communicate with your cluster.
+Minikube Issues: If you encounter problems with Minikube, you can reset it by running minikube stop and minikube start.
