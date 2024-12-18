@@ -47,7 +47,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/my-app:${{github.run_number}}
+        tags: ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.run_number }}
 
   # Job to deploy to Minikube
   kubernetes-deploy:
@@ -85,11 +85,11 @@ jobs:
     # Deploy to Minikube
     - name: Deploy to Minikube
       run: |
-        # Set image tag to the commit SHA
+        # Set the image tag using GitHub SHA
         IMAGE_TAG=${{ github.sha }}
-        
-        # Apply the deployment using the dynamic image tag
-        kubectl apply -f kubernetes/deployment.yaml --set image.tag=$IMAGE_TAG
+
+        # Update the deployment with the new image tag
+        kubectl set image deployment/my-app my-app=${{ secrets.DOCKER_USERNAME }}/my-app:$IMAGE_TAG
 
   # Job to send email notifications
   notify:
