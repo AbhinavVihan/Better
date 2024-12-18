@@ -28,10 +28,6 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Build Docker image
-      run: |
-        docker build -t my-app:latest .
-
   # Job to build and push the Docker image to Docker Hub
   deploy:
     needs: build
@@ -48,12 +44,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image to Docker Hub
-      run: |
-        DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/my-app
-        IMAGE_TAG=${{ github.sha }}  # Use commit SHA as version tag
-
-        docker tag my-app:latest ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/my-app:${{github.run_number}}
 
   # Job to deploy to Minikube
   kubernetes-deploy:
