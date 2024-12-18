@@ -3,10 +3,10 @@ name: Node.js CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - release  # Trigger on push to the release branch
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch
+      - release  # Trigger on pull requests targeting the release branch
 
 jobs:
   # Job to set up the environment, run tests, and build the Docker image

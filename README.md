@@ -67,7 +67,7 @@ This will open the application in your default web browser at the Minikube IP ad
 CI/CD Pipeline
 This project uses GitHub Actions to automate the following tasks:
 
-Run tests on each push or pull request to the main branch.
+Run tests on each push or pull request to the release branch.
 Build the Docker image from the Node.js application and push it to Docker Hub.
 Deploy the Docker image to a Kubernetes cluster (using Minikube in this case).
 Workflow Overview
