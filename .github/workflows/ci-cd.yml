@@ -49,11 +49,11 @@ jobs:
 
     - name: Build and push Docker image to Docker Hub
       run: |
-        DOCKER_REPO=abhik0/my-app
+        DOCKER_REPO=${{ secrets.DOCKER_USERNAME }}/my-app
         IMAGE_TAG=${{ github.sha }}  # Use commit SHA as version tag
 
-        docker tag my-app:latest abhik0/my-app:latest
-        docker push abhik0/my-app:latest
+        docker tag my-app:latest ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
   # Job to deploy to Minikube
   kubernetes-deploy:
