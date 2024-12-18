@@ -30,7 +30,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t my-app:latest .
+        docker build -t my-app:${{ github.sha }} .
 
   # Job to build and push the Docker image to Docker Hub
   deploy:
