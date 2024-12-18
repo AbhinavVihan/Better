@@ -30,7 +30,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t my-app:${{ github.sha }} .
+        docker build -t my-app:latest.
 
   # Job to build and push the Docker image to Docker Hub
   deploy:
@@ -52,8 +52,8 @@ jobs:
         DOCKER_REPO=abhik0/my-app
         IMAGE_TAG=${{ github.sha }}  # Use commit SHA as version tag
 
-        docker tag my-app:${{ github.sha }} $DOCKER_REPO:$IMAGE_TAG
-        docker push $DOCKER_REPO:$IMAGE_TAG
+        docker tag my-app:latest abhik0/my-app:latest
+        docker push abhik0/my-app:latest
 
   # Job to deploy to Minikube
   kubernetes-deploy:
