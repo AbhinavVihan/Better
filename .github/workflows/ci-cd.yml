@@ -123,9 +123,9 @@ jobs:
     - name: Send success notification
       if: success()
       run: |
-        echo "Deployment Successful!" | msmtp -s "CI/CD Pipeline Success" abhinavchaudhary348@gmail.com
+        echo -e "Subject: CI/CD Pipeline Success\n\nDeployment Successful!" | msmtp ${{ secrets.NOTIFY_EMAIL }}
 
     - name: Send failure notification
       if: failure()
       run: |
-        echo "Deployment Failed!" | msmtp -s "CI/CD Pipeline Failure" abhinavchaudhary348@gmail.com
+        echo -e "Subject: CI/CD Pipeline Failure\n\nDeployment Failed!" | msmtp ${{ secrets.NOTIFY_EMAIL }}
