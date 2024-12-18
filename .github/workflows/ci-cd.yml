@@ -52,7 +52,7 @@ jobs:
         DOCKER_REPO=abhik0/my-app
         IMAGE_TAG=${{ github.sha }}  # Use commit SHA as version tag
 
-        docker tag my-app:latest $DOCKER_REPO:$IMAGE_TAG
+        docker tag my-app:${{ github.sha }} $DOCKER_REPO:$IMAGE_TAG
         docker push $DOCKER_REPO:$IMAGE_TAG
 
   # Job to deploy to Minikube
