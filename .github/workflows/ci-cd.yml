@@ -105,19 +105,16 @@ jobs:
         sudo apt-get update
         sudo apt-get install msmtp msmtp-mta
 
-    - name: Configure msmtp (for Gmail SMTP example)
+    - name: Set up msmtp configuration
       run: |
-        echo "defaults" > ~/.msmtprc
-        echo "account gmail" >> ~/.msmtprc
-        echo "host smtp.gmail.com" >> ~/.msmtprc
-        echo "port 587" >> ~/.msmtprc
-        echo "auth on" >> ~/.msmtprc
-        echo "user ${{ secrets.GMAIL_USERNAME }}" >> ~/.msmtprc
-        echo "from ${{ secrets.GMAIL_USERNAME }}" >> ~/.msmtprc
-        echo "password ${{ secrets.GMAIL_PASSWORD }}" >> ~/.msmtprc
-        echo "tls on" >> ~/.msmtprc
-        echo "tls_starttls on" >> ~/.msmtprc
-        echo "logfile ~/.msmtp.log" >> ~/.msmtprc
+        echo "account default
+        host smtp.gmail.com
+        port 587
+        from ${{ secrets.GMAIL_USERNAME }}
+        auth on
+        user ${{ secrets.GMAIL_USERNAME }}
+        password ${{ secrets.GMAIL_PASSWORD }}
+        tls on" > ~/.msmtprc
         chmod 600 ~/.msmtprc
 
     - name: Send success notification
